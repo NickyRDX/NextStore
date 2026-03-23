@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Perfil {
+  id        String   @id @default(uuid())
+  authId    String   @unique // ID de Supabase Auth
+  nombre    String
+  email     String   @unique
+  rol       Rol      @default(EMPLEADO)
+  telefono  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ventas Venta[]
+
+  @@map("perfiles")
+}
+
+enum Rol {
+  DUENO
+  EMPLEADO
+}
+
+model Categoria {
+  id       String     @id @default(uuid())
+  nombre   String     @unique
+  productos Producto[]
+
+  @@map("categorias")
+}
+
+model Producto {
+  id            String   @id @default(uuid())
+  nombre        String
+  descripcion   String?
+  codigoBarras  String?  @unique
+  categoriaId   String?
+  proveedorId   String?
+  precioCosto   Decimal  @db.Decimal(12, 2) // Lo que paga el dueno
+  precioVenta   Decimal  @db.Decimal(12, 2) // Lo que paga el cliente
+  stock         Int      @default(0)
+  stockMinimo   Int      @default(5) // Alerta de bajo stock
+  unidad        String   @default("unidad") // unidad, kg, litro, etc.
+  activo        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  categoria  Categoria?  @relation(fields: [categoriaId], references: [id])
+  proveedor  Proveedor?  @relation(fields: [proveedorId], references: [id])
+  itemsVenta ItemVenta[]
+
+  @@map("productos")
+}
+
+model Proveedor {
+  id        String   @id @default(uuid())
+  nombre    String
+  empresa   String?
+  telefono  String?
+  email     String?
+  direccion String?
+  notas     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  productos Producto[]
+  visitas   VisitaProveedor[]
+
+  @@map("proveedores")
+}
+
+model VisitaProveedor {
+  id           String         @id @default(uuid())
+  proveedorId  String
+  fecha        DateTime
+  notas        String?
+  estado       EstadoVisita   @default(PENDIENTE)
+  createdAt    DateTime       @default(now())
+
+  proveedor Proveedor @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+
+  @@map("visitas_proveedor")
+}
+
+enum EstadoVisita {
+  PENDIENTE
+  COMPLETADA
+  CANCELADA
+}
+
+model Venta {
+  id          String   @id @default(uuid())
+  vendedorId  String
+  total       Decimal  @db.Decimal(12, 2) // Suma de precioVenta * cantidad
+  costoTotal  Decimal  @db.Decimal(12, 2) // Suma de precioCosto * cantidad
+  ganancia    Decimal  @db.Decimal(12, 2) // total - costoTotal
+  createdAt   DateTime @default(now())
+
+  vendedor Perfil      @relation(fields: [vendedorId], references: [id])
+  items    ItemVenta[]
+
+  @@map("ventas")
+}
+
+model ItemVenta {
+  id              String  @id @default(uuid())
+  ventaId         String
+  productoId      String
+  cantidad        Int
+  precioUnitario  Decimal @db.Decimal(12, 2) // Snapshot del precioVenta
+  costoUnitario   Decimal @db.Decimal(12, 2) // Snapshot del precioCosto
+
+  venta    Venta    @relation(fields: [ventaId], references: [id], onDelete: Cascade)
+  producto Producto @relation(fields: [productoId], references: [id])
+
+  @@map("items_venta")
+}
+
+model Empleado {
+  id          String   @id @default(uuid())
+  nombre      String
+  apellido    String
+  dni         String   @unique
+  telefono    String?
+  email       String?
+  turno       Turno
+  fechaInicio DateTime
+  activo      Boolean  @default(true)
+  notas       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("empleados")
+}
+
+enum Turno {
+  MANANA
+  TARDE
+  NOCHE
+}
