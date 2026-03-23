@@ -3,7 +3,7 @@ name: MVP Gestor Inventario Kioscos
 overview: Plan completo para desarrollar el MVP del Gestor de Inventario Inteligente para drugstores/kioscos argentinos, cubriendo las 5 páginas principales (Dashboard, Productos, Ventas, Proveedores, Empleados) con Server Actions, PPR, autenticación basada en roles y métricas de márgenes de ganancia reales.
 todos:
   - id: fase-0-middleware
-    content: "Fase 0.1: Crear middleware.ts con proteccion de rutas y roles (mover logica de proxy.ts)"
+    content: "Fase 0.1: Crear Proxy.ts con proteccion de rutas y roles (mover logica de proxy.ts)"
     status: pending
   - id: fase-0-types
     content: "Fase 0.2: Crear carpeta types/ con tipos TypeScript por dominio (producto, venta, proveedor, empleado, dashboard)"
@@ -168,7 +168,7 @@ nextstore/
 │           ├── TablaEmpleados/
 │           ├── FormEmpleado/
 │           └── DialogEmpleado/
-├── middleware.ts          (NUEVO - protección de rutas + roles)
+├── proxy.ts          (NUEVO - protección de rutas + roles)
 └── ...
 ```
 
@@ -176,11 +176,11 @@ nextstore/
 
 ## Fase 0: Infraestructura Base
 
-### 0.1 Crear `middleware.ts` (Protección de rutas y roles)
+### 0.1 Crear `proxy.ts` (Protección de rutas y roles)
 
 Actualmente tienes `proxy.ts` y `lib/supabase/proxy.ts` pero **no hay `middleware.ts`** en la raíz. Next.js necesita ese archivo exacto para ejecutar middleware. Se debe:
 
-- Renombrar/mover la lógica de [proxy.ts](proxy.ts) a `middleware.ts`
+- Renombrar/mover la lógica de [proxy.ts](proxy.ts) a `middleware.ts en las ultima vers`
 - Agregar protección por rol: las rutas `/dashboard` y `/productos` solo accesibles para `DUENO`
 - Las rutas `/ventas` accesibles para `DUENO` y `EMPLEADO`
 
@@ -196,7 +196,7 @@ Existen dos carpetas: `shared/SideBar/` y `shared/Sidebar/`. Unificar en una sol
 
 ## Fase 1: Dashboard (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/dashboard/page.tsx](app/(router)/(principal)/dashboard/page.tsx)
+Página: [app/(router)/(principal)/dashboard/page.tsx](<app/(router)/(principal)/dashboard/page.tsx>)
 
 ### Métricas reales del negocio (cards):
 
@@ -249,7 +249,7 @@ export default function DashboardPage() {
 
 ## Fase 2: Productos (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/productos/page.tsx](app/(router)/(principal)/productos/page.tsx)
+Página: [app/(router)/(principal)/productos/page.tsx](<app/(router)/(principal)/productos/page.tsx>)
 
 ### Funcionalidades:
 
@@ -277,7 +277,7 @@ Cada action valida los datos del formulario con schemas Zod antes de tocar la ba
 
 ## Fase 3: Ventas (DUEÑO + EMPLEADOS)
 
-Página: [app/(router)/(principal)/ventas/page.tsx](app/(router)/(principal)/ventas/page.tsx)
+Página: [app/(router)/(principal)/ventas/page.tsx](<app/(router)/(principal)/ventas/page.tsx>)
 
 ### Diseño orientado a velocidad:
 
@@ -328,7 +328,7 @@ Esta es la página más crítica en UX. El empleado debe poder registrar una ven
 
 ## Fase 4: Proveedores (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/proveedores/page.tsx](app/(router)/(principal)/proveedores/page.tsx)
+Página: [app/(router)/(principal)/proveedores/page.tsx](<app/(router)/(principal)/proveedores/page.tsx>)
 
 ### Funcionalidades:
 
@@ -351,7 +351,7 @@ Página: [app/(router)/(principal)/proveedores/page.tsx](app/(router)/(principal
 
 ## Fase 5: Empleados (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/empleados/page.tsx](app/(router)/(principal)/empleados/page.tsx)
+Página: [app/(router)/(principal)/empleados/page.tsx](<app/(router)/(principal)/empleados/page.tsx>)
 
 ### Funcionalidades:
 
@@ -404,10 +404,9 @@ export async function verificarDueno() {
 
 El orden está pensado para que cada fase se construya sobre la anterior y puedas probar incrementalmente:
 
-1. **Fase 0** - Middleware + types + limpieza
+1. **Fase 0** - Proxy + types + limpieza
 2. **Fase 2** - Productos (necesitas datos para que todo lo demás funcione)
 3. **Fase 3** - Ventas (el flujo core del negocio)
 4. **Fase 1** - Dashboard (necesita ventas y productos cargados para mostrar métricas)
 5. **Fase 4** - Proveedores
 6. **Fase 5** - Empleados
-

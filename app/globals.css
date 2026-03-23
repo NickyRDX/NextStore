@@ -122,4 +122,5 @@ html, body{
   height: 100vh;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: var(--font-inter-sans);
 }

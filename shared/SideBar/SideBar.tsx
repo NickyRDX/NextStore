@@ -39,13 +39,13 @@ export default function SideBar() {
               alt="Logo"
               width={28}
               height={28}
-              quality={100}
+              quality={75}
               className="object-contain"
             />
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
             <span className="truncate font-semibold cursor-default text-slate-700 dark:text-slate-200 tracking-tight text-base">
-              Drugstore Controls
+              NextStore
             </span>
             <span className="truncate text-xs cursor-default text-muted-foreground font-medium">
               Control Panel

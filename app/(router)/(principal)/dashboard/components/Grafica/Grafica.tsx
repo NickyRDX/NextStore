@@ -45,9 +45,9 @@ export default function Grafica() {
   return (
     <Card className="border-muted-foreground/10 rounded-sm border-solid border">
       <CardHeader>
-        <CardTitle>Margenes de Ganancias</CardTitle>
+        <CardTitle>Ventas del día</CardTitle>
         <CardDescription>
-          Mostrando el total de margenes de ganancias de los últimos 6 meses.
+          Movimientos realizados por tu negocio 
         </CardDescription>
       </CardHeader>
       <CardContent>
