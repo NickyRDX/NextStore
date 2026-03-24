@@ -196,7 +196,7 @@ Existen dos carpetas: `shared/SideBar/` y `shared/Sidebar/`. Unificar en una sol
 
 ## Fase 1: Dashboard (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/dashboard/page.tsx](<app/(router)/(principal)/dashboard/page.tsx>)
+Página: [app/(router)/(principal)/dashboard/page.tsx](app/(router)/(principal)/dashboard/page.tsx)
 
 ### Métricas reales del negocio (cards):
 
@@ -249,7 +249,7 @@ export default function DashboardPage() {
 
 ## Fase 2: Productos (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/productos/page.tsx](<app/(router)/(principal)/productos/page.tsx>)
+Página: [app/(router)/(principal)/productos/page.tsx](app/(router)/(principal)/productos/page.tsx)
 
 ### Funcionalidades:
 
@@ -277,7 +277,7 @@ Cada action valida los datos del formulario con schemas Zod antes de tocar la ba
 
 ## Fase 3: Ventas (DUEÑO + EMPLEADOS)
 
-Página: [app/(router)/(principal)/ventas/page.tsx](<app/(router)/(principal)/ventas/page.tsx>)
+Página: [app/(router)/(principal)/ventas/page.tsx](app/(router)/(principal)/ventas/page.tsx)
 
 ### Diseño orientado a velocidad:
 
@@ -328,7 +328,7 @@ Esta es la página más crítica en UX. El empleado debe poder registrar una ven
 
 ## Fase 4: Proveedores (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/proveedores/page.tsx](<app/(router)/(principal)/proveedores/page.tsx>)
+Página: [app/(router)/(principal)/proveedores/page.tsx](app/(router)/(principal)/proveedores/page.tsx)
 
 ### Funcionalidades:
 
@@ -351,7 +351,7 @@ Página: [app/(router)/(principal)/proveedores/page.tsx](<app/(router)/(principa
 
 ## Fase 5: Empleados (Solo DUEÑO)
 
-Página: [app/(router)/(principal)/empleados/page.tsx](<app/(router)/(principal)/empleados/page.tsx>)
+Página: [app/(router)/(principal)/empleados/page.tsx](app/(router)/(principal)/empleados/page.tsx)
 
 ### Funcionalidades:
 
@@ -410,3 +410,4 @@ El orden está pensado para que cada fase se construya sobre la anterior y pueda
 4. **Fase 1** - Dashboard (necesita ventas y productos cargados para mostrar métricas)
 5. **Fase 4** - Proveedores
 6. **Fase 5** - Empleados
+

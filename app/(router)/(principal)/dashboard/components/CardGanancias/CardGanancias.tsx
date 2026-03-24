@@ -1,4 +1,4 @@
-"use client";
+
 import React from "react";
 import {
   Card,
@@ -11,7 +11,11 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUpIcon } from "lucide-react";
-export default function CardGanancias() {
+import { connection } from 'next/server';
+import {getProductosStats} from '@/actions/dashboard'
+export default async function CardGanancias() {
+  await connection()
+  const {bajoStock} = await getProductosStats()
   return (
     <Card className="border-muted-foreground/10 rounded-sm border w-full min-h-[220px] flex flex-col">
       <CardHeader className="space-y-0 pb-2">

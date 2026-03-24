@@ -1,10 +1,14 @@
-"use client";
+
 import { Badge } from '@/components/ui/badge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUpIcon } from 'lucide-react';
 import React from 'react'
-
-export default function CardProductos() {
+import {getProductosStats} from '@/actions/dashboard'
+import { connection } from 'next/server';
+export default async function CardProductos() {
+  await connection()
+  const {totalActivos} = await getProductosStats()
+  console.log("Total de productos:", totalActivos)
   return (
     <Card className="border-muted-foreground/10 rounded-sm border w-full min-h-[220px] flex flex-col">
       <CardHeader className="space-y-0 pb-2">
@@ -21,7 +25,7 @@ export default function CardProductos() {
           </Badge>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">
-          4000
+          {totalActivos}
         </CardTitle>
       </CardHeader>
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">

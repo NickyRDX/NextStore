@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {
   Card,
@@ -16,6 +15,7 @@ import { connection } from 'next/server';
 export default async function CardIngresos() {
   await connection()
   const {cantidadVentas, monto} = await getIngresosHoy()
+  console.log("Cantidad de ventas:", cantidadVentas)
   return (
     <Card className="border-muted-foreground/10 rounded-sm border w-full min-h-[220px] flex flex-col">
       <CardHeader className="space-y-0 pb-2">

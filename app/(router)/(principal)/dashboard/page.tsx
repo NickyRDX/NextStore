@@ -1,4 +1,3 @@
-
 import React, { Suspense } from "react";
 import CardIngresos from "./components/CardIngresos/CardIngresos";
 import Grafica from "./components/Grafica/Grafica";
@@ -14,9 +13,15 @@ export default function DashboardPage() {
         <Suspense fallback={<SkeletonCard />}>
           <CardIngresos />
         </Suspense>
-        <CardProductos />
-        <CardGanancias />
-        <CardBajoStock />
+        <Suspense fallback={<SkeletonCard />}>
+          <CardProductos />
+        </Suspense>
+        <Suspense fallback={<SkeletonCard />}>
+          <CardGanancias />
+        </Suspense>
+        <Suspense fallback={<SkeletonCard />}>
+          <CardBajoStock />
+        </Suspense>
       </section>
       <section className="gap-6">
         <Grafica />
