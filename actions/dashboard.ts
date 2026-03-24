@@ -51,6 +51,7 @@ export async function getIngresosHoy(): Promise<IngresosHoy> {
 
   return {
     monto: aNumero(agg._sum.total),
+  
     // Cuántas filas de `venta` cumplen el filtro de fecha (una venta = un registro).
     cantidadVentas: agg._count,
   }
