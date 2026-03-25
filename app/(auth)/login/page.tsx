@@ -83,7 +83,7 @@ export default function page() {
                   autoComplete="off"
                   type="email"
                   required
-                  className="h-12 focus-visible:ring-blue-400/70 focus-visible:border-blue-400 ring-2 ring-blue-300 w-full rounded-xl"
+                  className="h-11 focus-visible:ring-blue-400/70 focus-visible:border-blue-400 ring-2 ring-blue-300 w-full rounded-sm"
                 />
               </Field>
             )}
@@ -100,14 +100,14 @@ export default function page() {
                   Contraseña
                 </FieldLabel>
                 <Input
-                  placeholder="por favor ingrese su contraseña"
+                  placeholder="password"
                   {...field}
                   id="form-rhf-demo-password"
                   aria-invalid={fieldState.invalid}
                   autoComplete="off"
                   type="password"
                   required
-                  className="h-12 focus-visible:ring-blue-400/57 focus-visible:border-blue-400 ring-2 ring-blue-300 w-full rounded-xl"
+                  className="h-11 focus-visible:ring-blue-400/57 focus-visible:border-blue-400 ring-2 ring-blue-300 w-full rounded-sm"
                 />
               </Field>
             )}
@@ -119,7 +119,7 @@ export default function page() {
             type="submit"
             form="form-rhf-demo"
             disabled={cargando}
-            className="w-full cursor-pointer h-12 text-base leading-relaxed tracking-tighter"
+            className="w-full cursor-pointer h-11 text-sm font-normal leading-relaxed tracking-tight"
           >
             {cargando ? <Spinner /> : "Iniciar sesión"}
           </Button>

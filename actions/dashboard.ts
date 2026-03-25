@@ -15,10 +15,10 @@ import { prisma } from "@/lib/prisma";
  */
 function rangoHoy(): { inicio: Date; fin: Date } {
   const inicio = new Date();
-  inicio.setHours(9, 0, 0, 0); // 00:00:00.000 del día actual
+  inicio.setHours(0, 0, 0, 0); // inicio del día calendario (hora local del servidor)
 
   const fin = new Date();
-  fin.setHours(23, 59, 59, 999); // 23:59:59.999 del mismo día
+  fin.setHours(23, 59, 59, 999); // fin del mismo día
 
   return { inicio, fin };
 }
@@ -128,7 +128,7 @@ export async function getVentasPorHora(): Promise<VentasPorHora[]> {
   // Preparamos 24 entradas, todas en 0. Así las horas sin ventas aparecen con monto 0
   // en el gráfico en lugar de “desaparecer” del eje X.
   const acumulado = new Map<number, number>();
-  for (let i = 9; i < 24; i++) acumulado.set(i, 0);
+  for (let i = 0; i < 24; i++) acumulado.set(i, 0);
 
   // Por cada venta: leemos la hora del reloj (0–23) y sumamos su `total` a esa caja.
   // `aNumero` convierte el Decimal de Prisma a `number` para poder sumar sin rarezas.
@@ -140,7 +140,7 @@ export async function getVentasPorHora(): Promise<VentasPorHora[]> {
   // Recharts (y similares) esperan un array de objetos planos: { hora, monto }.
   // Orden fijo 0→23 hace que el eje X siempre sea “00:00” … “23:00”.
   const filas: VentasPorHora[] = [];
-  for (let i = 9; i < 24; i++) {
+  for (let i = 0; i < 24; i++) {
     filas.push({
       // padStart(2,"0") → 8 → "08" para que quede "08:00" y no "8:00"
       hora: `${String(i).padStart(2, "0")}:00`,
