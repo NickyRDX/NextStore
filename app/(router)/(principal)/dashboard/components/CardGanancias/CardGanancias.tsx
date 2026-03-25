@@ -12,10 +12,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { TrendingUpIcon } from "lucide-react";
 import { connection } from 'next/server';
-import {getProductosStats} from '@/actions/dashboard'
+import {getGanancias} from '@/actions/dashboard'
 export default async function CardGanancias() {
   await connection()
-  const {bajoStock} = await getProductosStats()
+  const {margenPorcentaje, montoGanancia} = await getGanancias()
   return (
     <Card className="border-muted-foreground/10 rounded-sm border w-full min-h-[220px] flex flex-col">
       <CardHeader className="space-y-0 pb-2">
@@ -32,11 +32,12 @@ export default async function CardGanancias() {
           </Badge>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">
-          12.5%
+          {margenPorcentaje.toFixed(2)}%
         </CardTitle>
       </CardHeader>
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
         Aqui esta el margen de ganancias reales de tu drugstore
+        Ganancia del día: $ {montoGanancia.toFixed(2)} · margen sobre ventas del día
       </CardFooter>
     </Card>
   );

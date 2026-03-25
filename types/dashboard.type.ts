@@ -7,8 +7,8 @@ export type ProductosStats = {
   bajoStock: number;
 };
 export type Ganancias = {
-  bajoStock: number;
-  totalActivos: number;
+  montoGanancia: number;
+  margenPorcentaje: number
 }
 
 export type VentasPorHora = {

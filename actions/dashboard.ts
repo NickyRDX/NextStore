@@ -56,8 +56,21 @@ export async function getIngresosHoy(): Promise<IngresosHoy> {
     cantidadVentas: agg._count,
   }
 }
-export async function getGanancias(){
+export async function getGanancias(): Promise<Ganancias>{
+  const {inicio, fin} = rangoHoy()
+  const agg2 = await prisma.venta.aggregate({
+    where: {createdAt: {gte: inicio, lte: fin}},
+    _sum: {ganancia: true, total: true},
+  })
+  const totalVendidoHoy = aNumero(agg2._sum.total)
+  const montoGanancia = aNumero(agg2._sum.ganancia)
 
+  const margenPorcentaje = totalVendidoHoy > 0 ? (montoGanancia / totalVendidoHoy) * 100 : 0
+
+  return {
+    montoGanancia,
+    margenPorcentaje,
+  }
 }
 export async function getProductosStats(): Promise<ProductosStats>{
   const [totalActivos, paraBajoStock] = await Promise.all([
