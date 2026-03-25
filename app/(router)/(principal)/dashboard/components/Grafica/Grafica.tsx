@@ -1,6 +1,6 @@
 "use client";
-import React from 'react'
-import { TrendingUp } from "lucide-react";
+
+import React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -17,37 +17,29 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-
-export const description = "A stacked area chart";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
+import type { VentasPorHora } from "@/types/dashboard.type";
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  monto: {
+    label: "Ventas",
     color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
   },
 } satisfies ChartConfig;
 
+type GraficaProps = {
+  /** Filas `{ hora, monto }` que devuelve `getVentasPorHora()` (Server Action). */
+  data: VentasPorHora[];
+};
 
-export default function Grafica() {
+export default function Grafica({ data }: GraficaProps) {
+  const totalDia = data.reduce((acc, row) => acc + row.monto, 0);
+
   return (
     <Card className="border-muted-foreground/10 rounded-sm border-solid border">
       <CardHeader>
         <CardTitle>Ventas del día</CardTitle>
         <CardDescription>
-          Movimientos realizados por tu negocio 
+          Monto facturado por hora (hoy)
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -57,7 +49,7 @@ export default function Grafica() {
         >
           <AreaChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             margin={{
               left: 12,
               right: 12,
@@ -65,45 +57,38 @@ export default function Grafica() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="hora"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 6)}
+              interval="preserveStartEnd"
+              minTickGap={24}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
             <Area
-              dataKey="mobile"
+              dataKey="monto"
               type="natural"
-              fill="var(--color-mobile)"
+              fill="var(--color-monto)"
               fillOpacity={0.4}
-              stroke="var(--color-mobile)"
-              stackId="a"
-            />
-            <Area
-              dataKey="desktop"
-              type="natural"
-              fill="var(--color-desktop)"
-              fillOpacity={0.4}
-              stroke="var(--color-desktop)"
-              stackId="a"
+              stroke="var(--color-monto)"
             />
           </AreaChart>
         </ChartContainer>
       </CardContent>
       <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              January - June 2024
-            </div>
-          </div>
+        <div className="flex w-full flex-col gap-1 text-sm text-muted-foreground leading-none">
+          <span className="font-medium text-foreground">
+            Total del día:{" "}
+            {totalDia.toLocaleString("es-AR", {
+              style: "currency",
+              currency: "ARS",
+              minimumFractionDigits: 2,
+            })}
+          </span>
+          <span>24 franjas horarias (09:00 - 23:59)</span>
         </div>
       </CardFooter>
     </Card>

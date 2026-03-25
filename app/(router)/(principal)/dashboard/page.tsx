@@ -5,6 +5,16 @@ import CardProductos from "./components/CardProductos/CardProductos";
 import CardGanancias from "./components/CardGanancias/CardGanancias";
 import CardBajoStock from "./components/CardBajoStock/CardBajoStock";
 import { SkeletonCard } from "@/shared/SkeletonCard";
+import SkeletonGrafico from "@/shared/SkeletonGrafico/SkeletonGrafico";
+import { getVentasPorHora } from "@/actions/dashboard";
+import { connection } from "next/server";
+
+/** Datos + `connection()` viven acá para quedar *dentro* del `<Suspense>` del padre (regla de Next). */
+async function DashboardGraficaLoader() {
+  await connection();
+  const ventasPorHora = await getVentasPorHora();
+  return <Grafica data={ventasPorHora} />;
+}
 
 export default function DashboardPage() {
   return (
@@ -24,7 +34,9 @@ export default function DashboardPage() {
         </Suspense>
       </section>
       <section className="gap-6">
-        <Grafica />
+        <Suspense fallback={<SkeletonGrafico />}>
+          <DashboardGraficaLoader />
+        </Suspense>
       </section>
     </section>
   );
