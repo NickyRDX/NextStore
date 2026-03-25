@@ -37,7 +37,7 @@ export default async function CardBajoStock() {
         </CardTitle>
       </CardHeader>
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
-        Aqui esta el total de productos con bajo stock en tu drugstore
+        Este recuadro muestra la cantidad total de productos cuyo stock actual es igual o inferior al mínimo definido en tu drugstore. Un producto en estado de bajo stock indica que está por agotarse o requiere reposición inmediata para evitar faltantes y ofrecer un servicio óptimo a tus clientes.
       </CardFooter>
     </Card>
   );

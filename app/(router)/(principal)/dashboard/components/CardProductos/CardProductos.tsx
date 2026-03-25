@@ -29,7 +29,8 @@ export default async function CardProductos() {
         </CardTitle>
       </CardHeader>
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
-        Aqui esta el total de productos que tienes en tu drugstore
+        Este recuadro muestra la cantidad total de productos activos registrados actualmente en el inventario de tu drugstore. 
+        Controlar este número te ayuda a tener una visión general de la variedad de productos disponibles para la venta y a identificar si tu stock se encuentra correctamente actualizado.
       </CardFooter>
     </Card>
   );

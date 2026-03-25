@@ -41,8 +41,9 @@ export default async function CardIngresos() {
         </CardTitle>
       </CardHeader>
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
-        Aqui esta el total de capital ingresado en tu drugstore sigue vendiendo
-        tus productos para aumentar tu capital
+      Este recuadro muestra el monto total de ingresos obtenidos hoy a partir de todas las ventas registradas en tu drugstore. 
+      El capital ingresado refleja la suma bruta de dinero generado en el día, resultado de las distintas transacciones y ventas efectuadas a tus clientes. 
+      Monitorear este valor te permite llevar un control diario sobre la entrada de dinero, evaluar el rendimiento comercial en tiempo real.
       </CardFooter>
     </Card>
   );
