@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 import { connection } from 'next/server';
 import { getProductosStats } from '@/actions/dashboard';
+import { IconClipboardX } from "@tabler/icons-react";
 export default async function CardBajoStock() {
   await connection()
   const {bajoStock} = await getProductosStats()
@@ -25,19 +26,25 @@ export default async function CardBajoStock() {
             Productos con bajo stock
           </CardDescription>
 
-          <Badge
+          {/* <Badge
             variant={`outline`}
             className="flex gap-1 items-center font-medium"
           >
             <TrendingDownIcon className="size-3 text-red-400" />
-          </Badge>
+          </Badge> */}
+          <div className="size-9 bg-red-700/20 rounded-md flex items-center justify-center">
+            <IconClipboardX size={24} className="text-red-400" />
+          </div>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">
           {bajoStock}
         </CardTitle>
       </CardHeader>
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
-        Este recuadro muestra la cantidad total de productos cuyo stock actual es igual o inferior al mínimo definido en tu drugstore. Un producto en estado de bajo stock indica que está por agotarse o requiere reposición inmediata para evitar faltantes y ofrecer un servicio óptimo a tus clientes.
+        Este recuadro muestra la cantidad total de productos cuyo stock actual
+        es igual o inferior al mínimo definido en tu drugstore. Un producto en
+        estado de bajo stock indica que está por agotarse o requiere reposición
+        inmediata.
       </CardFooter>
     </Card>
   );
