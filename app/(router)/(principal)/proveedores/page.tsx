@@ -2,7 +2,15 @@
 import { Button } from '@/components/ui/button';
 import { IconPlusFilled } from '@tabler/icons-react';
 import React from 'react'
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 export default function ProveedoresPage() {
   return (
     <section className="p-3">
