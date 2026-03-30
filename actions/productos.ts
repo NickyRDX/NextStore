@@ -1,72 +1,72 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { z } from "zod"
+import { prisma } from "@/lib/prisma"
+import { ProductFormDato } from "@/app/(router)/(principal)/productos/components/product.form"
 
-// Schema de validación para el producto
-const productoSchema = z.object({
-  nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-  descripcion: z.string().optional(),
-  codigoBarras: z.string().optional(),
-  categoriaId: z.string().optional(),
-  proveedorId: z.string().optional(),
-  precioCosto: z.coerce.number().min(0, "El precio de costo no puede ser negativo"),
-  precioVenta: z.coerce.number().min(0, "El precio de venta no puede ser negativo"),
-  stock: z.coerce.number().int().min(0, "El stock no puede ser negativo"),
-  stockMinimo: z.coerce.number().int().min(0, "El stock mínimo no puede ser negativo"),
-  unidad: z.string().default("unidad"),
-})
+const PER_PAGE = 10
 
-export async function crearProducto(formData: FormData) {
-  // Simulación de delay para mostrar estado de carga
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+export async function getProductos({ page = 1 }: { page?: number } = {}) {
+  const skip = (page - 1) * PER_PAGE
 
-  const rawData = {
-    nombre: formData.get("nombre"),
-    descripcion: formData.get("descripcion"),
-    codigoBarras: formData.get("codigoBarras"),
-    categoriaId: formData.get("categoriaId"),
-    proveedorId: formData.get("proveedorId"),
-    precioCosto: formData.get("precioCosto"),
-    precioVenta: formData.get("precioVenta"),
-    stock: formData.get("stock"),
-    stockMinimo: formData.get("stockMinimo"),
-    unidad: formData.get("unidad"),
+  const [rawProductos, total] = await Promise.all([
+    prisma.producto.findMany({
+      where: { activo: true },
+      include: { categoria: { select: { nombre: true } } },
+      skip,
+      take: PER_PAGE,
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.producto.count({ where: { activo: true } }),
+  ])
+
+  const productos = rawProductos.map((p) => ({
+    id: p.id,
+    nombre: p.nombre,
+    descripcion: p.descripcion,
+    categoria: p.categoria?.nombre ?? null,
+    precioCosto: Number(p.precioCosto),
+    precioVenta: Number(p.precioVenta),
+    stock: p.stock,
+    stockMinimo: p.stockMinimo,
+  }))
+
+  return {
+    productos,
+    total,
+    totalPages: Math.ceil(total / PER_PAGE),
   }
+}
 
-  const validatedData = productoSchema.safeParse(rawData)
-
-  if (!validatedData.success) {
-    return {
-      success: false,
-      errors: validatedData.error.flatten().fieldErrors,
+export async function crearProducto(data: ProductFormDato): Promise<{ success: boolean; error?: string }> {
+  try {
+    // Si el usuario escribió una categoría, la buscamos o creamos
+    let categoriaId: string | null = null
+    if (data.categoria?.trim()) {
+      const categoria = await prisma.categoria.upsert({
+        where: { nombre: data.categoria.trim() },
+        create: { nombre: data.categoria.trim() },
+        update: {},
+      })
+      categoriaId = categoria.id
     }
+
+    await prisma.producto.create({
+      data: {
+        nombre: data.nombre,
+        descripcion: data.descripcion?.trim() || null,
+        categoriaId,
+        precioCosto: data.precioCosto,
+        precioVenta: data.precioVenta,
+        stock: data.stock,
+        stockMinimo: data.stockMinimo,
+      },
+    })
+
+    revalidatePath("/productos")
+    return { success: true }
+  } catch (error) {
+    console.error("Error al crear producto:", error)
+    return { success: false, error: "No se pudo crear el producto. Intentá de nuevo." }
   }
-
-  // Aquí iría la lógica de Prisma:
-  // await prisma.producto.create({ data: validatedData.data })
-
-  console.log("Producto creado:", validatedData.data)
-
-  revalidatePath("/productos")
-  return { success: true }
-}
-
-export async function getCategorias() {
-  // Simulación de categorías
-  return [
-    { id: "1", nombre: "Bebidas" },
-    { id: "2", nombre: "Golosinas" },
-    { id: "3", nombre: "Cigarrillos" },
-    { id: "4", nombre: "Almacén" },
-  ]
-}
-
-export async function getProveedores() {
-  // Simulación de proveedores
-  return [
-    { id: "1", nombre: "Coca Cola" },
-    { id: "2", nombre: "Arcor" },
-    { id: "3", nombre: "Massalin" },
-  ]
 }

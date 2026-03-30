@@ -94,8 +94,8 @@ importers:
         specifier: ^7.5.0
         version: 7.5.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)
       shadcn:
-        specifier: ^4.1.0
-        version: 4.1.0(@types/node@20.19.37)(typescript@5.9.3)
+        specifier: ^4.1.1
+        version: 4.1.1(@types/node@20.19.37)(typescript@5.9.3)
       tailwindcss:
         specifier: ^4
         version: 4.2.2
@@ -3856,8 +3856,8 @@ packages:
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
 
-  shadcn@4.1.0:
-    resolution: {integrity: sha512-3zETJ+0Ezj69FS6RL0HOkLKKAR5yXisXx1iISJdfLQfrUqj/VIQlanQi1Ukk+9OE+XHZVj4FQNTBSfbr2CyCYg==}
+  shadcn@4.1.1:
+    resolution: {integrity: sha512-nBj+7LYC9kzV9v9QmRPpoOhfW4KctJVQejywdAt/K+K+z4RYlJOcO2a4AaF7elrRWkfCbgXeGK02liV0KB9HvQ==}
     hasBin: true
 
   sharp@0.34.5:
@@ -8344,7 +8344,7 @@ snapshots:
 
   setprototypeof@1.2.0: {}
 
-  shadcn@4.1.0(@types/node@20.19.37)(typescript@5.9.3):
+  shadcn@4.1.1(@types/node@20.19.37)(typescript@5.9.3):
     dependencies:
       '@babel/core': 7.29.0
       '@babel/parser': 7.29.2

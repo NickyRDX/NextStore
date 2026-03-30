@@ -79,8 +79,11 @@ export async function getGanancias(): Promise<Ganancias> {
   };
 }
 export async function getProductosStats(): Promise<ProductosStats> {
-  const [totalActivos, paraBajoStock] = await Promise.all([
-    prisma.producto.count({ where: { activo: true } }),
+  const [agg, paraBajoStock] = await Promise.all([
+    prisma.producto.aggregate({
+      where: { activo: true },
+      _sum: { stock: true },
+    }),
     prisma.producto.findMany({
       where: { activo: true },
       select: { stock: true, stockMinimo: true },
@@ -90,7 +93,7 @@ export async function getProductosStats(): Promise<ProductosStats> {
     (p) => p.stock <= p.stockMinimo,
   ).length;
   return {
-    totalActivos,
+    totalActivos: agg._sum.stock ?? 0,
     bajoStock,
   };
 }
