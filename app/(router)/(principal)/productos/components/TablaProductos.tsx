@@ -1,3 +1,4 @@
+"use client"
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -55,13 +56,13 @@ function StockBadge({ stock, stockMinimo }: { stock: number; stockMinimo: number
   if (stock <= stockMinimo) {
     return (
       <Badge className="bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border border-yellow-500/20 hover:bg-yellow-500/10 text-xs font-medium">
-        Bajo · {stock}
+        Bajo {stock}
       </Badge>
     );
   }
   return (
     <Badge className="bg-green-500/10 text-green-700 dark:text-green-400 border border-green-500/20 hover:bg-green-500/10 text-xs font-medium">
-      {stock} en stock
+      {stock}
     </Badge>
   );
 }
@@ -84,19 +85,19 @@ export default function TablaProductos({ productos }: Props) {
       <Table>
         <TableHeader className="">
           <TableRow className="bg-muted/40 hover:bg-muted/40 border-none">
-            <TableHead className="pl-4 font-semibold">Nombre</TableHead>
-            <TableHead className="font-semibold">Categoría</TableHead>
-            <TableHead className="font-semibold text-right">Costo</TableHead>
-            <TableHead className="font-semibold text-right">Venta</TableHead>
-            <TableHead className="font-semibold text-center">Margen</TableHead>
-            <TableHead className="font-semibold text-center pr-4">Stock</TableHead>
+            <TableHead className="text-slate-700 dark:text-slate-200 tracking-tight pl-4 font-semibold">Nombre</TableHead>
+            <TableHead className="text-slate-700 dark:text-slate-200 tracking-tight font-semibold">Categoría</TableHead>
+            <TableHead className="text-slate-700 dark:text-slate-200 tracking-tight font-semibold text-right">Compra</TableHead>
+            <TableHead className="text-slate-700 dark:text-slate-200 tracking-tight font-semibold text-right">Venta</TableHead>
+            <TableHead className="text-slate-700 dark:text-slate-200 tracking-tight font-semibold text-center">Margen</TableHead>
+            <TableHead className="text-slate-700 dark:text-slate-200 tracking-tight font-semibold text-center pr-4">Stock</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {productos.map((p) => (
             <TableRow className='border-slate-200 dark:border-slate-800' key={p.id}>
               <TableCell className="pl-4">
-                <span className="font-medium">{p.nombre}</span>
+                <span className="font-medium tracking-tight">{p.nombre}</span>
                 {p.descripcion && (
                   <p className="text-xs text-muted-foreground mt-0.5 max-w-[180px] truncate">
                     {p.descripcion}
@@ -105,15 +106,15 @@ export default function TablaProductos({ productos }: Props) {
               </TableCell>
               <TableCell>
                 {p.categoria ? (
-                  <span className="text-sm">{p.categoria}</span>
+                  <span className="text-sm tracking-tight">{p.categoria}</span>
                 ) : (
                   <span className="text-muted-foreground text-xs">—</span>
                 )}
               </TableCell>
-              <TableCell className="text-right tabular-nums">
+              <TableCell className="text-right tabular-nums tracking-tight">
                 AR{formatPrecio(p.precioCosto)}
               </TableCell>
-              <TableCell className="text-right tabular-nums">
+              <TableCell className="text-right tabular-nums tracking-tight">
                 AR{formatPrecio(p.precioVenta)}
               </TableCell>
               <TableCell className="text-center">
