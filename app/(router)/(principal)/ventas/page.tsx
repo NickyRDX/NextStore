@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dialog";
 export default function VentasPage() {
   return (
-    <section className="p-5">
-      
+    <section className="p-3">
+      <h1></h1>
     </section>
   );
 }
