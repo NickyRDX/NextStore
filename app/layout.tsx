@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/shared/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { ChakraProvider } from "@chakra-ui/react";
 const InterSans = Inter({
   variable: "--font-inter-sans",
   subsets: ["latin"],
