@@ -3,5 +3,5 @@ export type ProductSearch = {
   nombre: string;
   precio: number;
   stock: number;
-  categoria: string | null
+  categoria: {nombre: string} | null
 }

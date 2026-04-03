@@ -17,7 +17,11 @@ import { toast } from "sonner";
 export default function VentasPage() {
   const { query, setQuery, filtrados, loading, error, total } =
     useProductSearch();
-  if (loading) return <Spinner className="size-6 text-blue-400" />;
+  if (loading) return (
+    <div className="w-full max-w-7xl mx-auto flex justify-center items-center h-full">
+      <Spinner className="size-9 text-blue-400" />
+    </div>
+  );
   if (error) return toast.error(error ?? "Error al cargar los productos");
   return (
     <>
@@ -47,7 +51,7 @@ export default function VentasPage() {
               </div>
               <div>
                 <p className='text-red-500'>
-                  {producto.categoria as string}
+                  {producto.categoria?.nombre  ?? "Sin categoría"}
                 </p>
               </div>
             </li>
