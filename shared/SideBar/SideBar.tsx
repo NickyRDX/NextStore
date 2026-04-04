@@ -108,7 +108,7 @@ export default function SideBar() {
       </SidebarContent>
       <SidebarFooter>
         <Button
-          variant="secondary"
+          variant="outline"
           onClick={LogoutButton}
           className="p-2.5 cursor-pointer rounded-sm leading-relaxed tracking-tight mb-2.5 text-muted-foreground h-10 group-data-[collapsible=icon]:hidden"
         >

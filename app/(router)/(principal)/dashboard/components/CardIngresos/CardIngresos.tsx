@@ -8,8 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TrendingUpIcon } from "lucide-react";
 import {getIngresosHoy} from '@/actions/dashboard'
 import { connection } from 'next/server';
 import { IconCurrencyDollar } from '@tabler/icons-react';

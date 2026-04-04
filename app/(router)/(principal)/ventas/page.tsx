@@ -13,6 +13,8 @@ import { useProductSearch } from "@/hooks/useProductSearch";
 import Search from "./components/Search/Search";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function VentasPage() {
   const { query, setQuery, filtrados, loading, error, total } =
@@ -32,31 +34,21 @@ export default function VentasPage() {
           resultados={filtrados.length}
         />
       </section>
-      <section className="p-3 max-w-2xl mx-auto">
-        <h1 className="text-xl font-bold mb-4">Registrar Venta</h1>
-        <p className="text-sm text-gray-500 mb-2">
-          {total} productos disponibles
-        </p>
-        <ul className="mt-4 space-y-2">
-          {filtrados.map((producto) => (
-            <li
-              onClick={() => {
-                console.log("producto seleccionado:", producto);
-              }}
-              key={producto.id}
-              className="p-3 border rounded-md flex justify-between items-center hover:bg-slate-100 cursor-pointer"
-            >
-              <div>
-                <p>{producto.nombre}</p>
-              </div>
-              <div>
-                <p className='text-red-500'>
-                  {producto.categoria?.nombre  ?? "Sin categoría"}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
+      <section className='p-3 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full max-w-[1600px] mx-auto'>
+        {filtrados.map((producto) => (
+          <Card key={producto.id} className='border-muted-foreground/20 border rounded-sm hover:border-primary/40 transition-all duration-200 ease-in-out max-w-2xl md:max-w-xs'>
+            <CardHeader>
+              <CardTitle className='text-pretty'>{producto.nombre}</CardTitle>
+              <Badge variant="outline">
+                {producto.categoria?.nombre ?? "n/a"}
+              </Badge>
+            </CardHeader>
+            <CardContent>
+              <span className="text-red-500">{
+                producto.precioVenta}</span>
+            </CardContent>
+          </Card>
+        ))}
       </section>
     </>
   );

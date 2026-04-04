@@ -1,7 +1,7 @@
 export type ProductSearch = {
   id: number;
   nombre: string;
-  precio: number;
+  precioVenta: number;
   stock: number;
   categoria: {nombre: string} | null
 }

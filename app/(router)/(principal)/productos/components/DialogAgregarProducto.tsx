@@ -20,6 +20,7 @@ import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 
 import { productFormSchema, ProductFormInput, ProductFormDato } from "./product.form";
 import { crearProducto } from "@/actions/productos";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function DialogAgregarProducto() {
   const [open, setOpen] = useState(false);
@@ -306,7 +307,7 @@ export default function DialogAgregarProducto() {
             disabled={loading}
             className="w-full h-10 rounded-sm leading-relaxed tracking-tight font-semibold cursor-pointer"
           >
-            {loading ? "Guardando…" : "Agregar Producto"}
+            {loading ? <Spinner/> : "Agregar Producto"}
           </Button>
         </div>
       </DialogContent>
