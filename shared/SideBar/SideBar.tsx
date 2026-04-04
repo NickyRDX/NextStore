@@ -110,7 +110,7 @@ export default function SideBar() {
         <Button
           variant="outline"
           onClick={LogoutButton}
-          className="p-2.5 cursor-pointer rounded-sm leading-relaxed tracking-tight mb-2.5 text-muted-foreground h-10 group-data-[collapsible=icon]:hidden"
+          className="p-2.5 cursor-pointer rounded-xs leading-relaxed tracking-tight mb-2.5 text-muted-foreground h-10 group-data-[collapsible=icon]:hidden"
         >
           Cerrar sesión
           <IconArrowBarToRight className="size-4 mt-0.5 ml-1" />

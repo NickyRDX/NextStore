@@ -78,7 +78,7 @@ export default function Grafica({ data }: GraficaProps) {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
+      <CardFooter className='bg-transparent border-t-muted-foreground/20'>
         <div className="flex w-full flex-col gap-1 text-sm text-muted-foreground leading-none">
           <span className="font-medium text-foreground">
             Total del día:{" "}
