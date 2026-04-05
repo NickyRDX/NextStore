@@ -17,7 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { IconCheck } from "@tabler/icons-react";
-export default function VentasPage() {
+import { getGanancias } from "@/actions/dashboard";export default function VentasPage() {
   const { query, setQuery, filtrados, loading, error, total } =
     useProductSearch();
   if (loading) return (
@@ -42,7 +42,7 @@ export default function VentasPage() {
             className="border-muted-foreground/10 border rounded-xs hover:border-primary/80 min-h-40 transition-all duration-200 ease-in-out max-w-2xl md:max-w-xs"
           >
             <CardHeader className="space-y-6 flex flex-row justify-between">
-              <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis leading-relaxed tracking-tight text-slate-700 dark:text-slate-200 text-lg">
+              <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis leading-relaxed tracking-tight text-slate-700 dark:text-slate-200 text-2xl md:text-lg">
                 {producto.nombre}
               </CardTitle>
               <Badge
@@ -53,7 +53,7 @@ export default function VentasPage() {
               </Badge>
             </CardHeader>
             <CardContent className="">
-              <span className="text-slate-700 dark:text-slate-200 text-lg md:text-xl font-medium">
+              <span className="text-slate-700 dark:text-slate-200 text-2xl md:text-xl font-medium">
                 AR$
                 {producto.precioVenta.toLocaleString("es-AR", {
                   minimumFractionDigits: 0,
