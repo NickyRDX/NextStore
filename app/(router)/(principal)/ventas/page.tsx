@@ -1,30 +1,37 @@
-"use client"
+"use client";
 import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { getVentas } from "@/actions/ventas";
 import { useProductSearch } from "@/hooks/useProductSearch";
 import Search from "./components/Search/Search";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { IconCheck } from "@tabler/icons-react";
-import { getGanancias } from "@/actions/dashboard";export default function VentasPage() {
-  const { query, setQuery, filtrados, loading, error, total } =
-    useProductSearch();
-  if (loading) return (
-    <div className="w-full max-w-7xl mx-auto flex justify-center items-center h-full">
-      <Spinner className="size-9 text-blue-400" />
-    </div>
-  );
+export default function VentasPage() {
+  const { query, setQuery, filtrados, loading, error } = useProductSearch();
+  async function venderProductos(productoId: string){
+    try{
+      console.log(productoId) 
+      await getVentas([{productoId, cantidad: 1}])
+      toast.success("Producto vendido correctamente")
+    }catch(e){
+      toast.error(e as string)
+    }
+  }
+  if (loading)
+    return (
+      <div className="w-full max-w-7xl mx-auto flex justify-center items-center h-full">
+        <Spinner className="size-9 text-blue-400" />
+      </div>
+    );
   if (error) return toast.error(error ?? "Error al cargar los productos");
   return (
     <>
@@ -62,8 +69,8 @@ import { getGanancias } from "@/actions/dashboard";export default function Venta
               </span>
             </CardContent>
             <CardFooter className="border-none bg-transparent">
-              <Button className="w-full rounded-xs py-4 leading-tight tracking-tight cursor-pointer">
-                <IconCheck stroke={2} className='size-5'/>
+              <Button onClick={()=>venderProductos(producto.id.toString())} className="w-full rounded-xs py-4 leading-tight tracking-tight cursor-pointer">
+                <IconCheck stroke={2} className="size-5" />
               </Button>
             </CardFooter>
           </Card>
