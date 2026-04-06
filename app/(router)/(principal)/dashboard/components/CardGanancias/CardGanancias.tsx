@@ -41,7 +41,7 @@ export default async function CardGanancias() {
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
         Este recuadro muestra el margen de ganancia real obtenido hoy en tu
         drugstore, calculando la proporción entre la ganancia neta y el total
-        vendido. Ganancia del día: $ {montoGanancia.toFixed(2)} · Representa la
+        vendido. Ganancia del día: AR$ {montoGanancia.toFixed(2)} · Representa la
         rentabilidad diaria sobre el total de ventas.
       </CardFooter>
     </Card>

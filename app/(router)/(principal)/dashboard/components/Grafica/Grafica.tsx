@@ -88,7 +88,7 @@ export default function Grafica({ data }: GraficaProps) {
               minimumFractionDigits: 2,
             })}
           </span>
-          <span>24 franjas horarias (09:00 - 23:59)</span>
+          <span>24 franjas horarias (00:00 - 23:00)</span>
         </div>
       </CardFooter>
     </Card>

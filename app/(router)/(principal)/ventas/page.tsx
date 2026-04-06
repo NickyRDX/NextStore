@@ -24,7 +24,7 @@ export default function VentasPage() {
       const r = await getVentas([{productoId, cantidad: 1}])
       if(r.success){
         toast.success("Producto vendido correctamente")
-        console.log(productoId) 
+        console.log(productoId)
       }else{
         toast.error(r.error ?? "Error al vender el producto")
       }
@@ -75,9 +75,17 @@ export default function VentasPage() {
                 })}
               </span>
             </CardContent>
-            <CardFooter className="border-none bg-transparent">
-              <Button onClick={()=>venderProductos(producto.id.toString())} className="w-full rounded-xs py-4 leading-tight tracking-tight cursor-pointer">
-                {l ? <Spinner className="size-5 text-blue-400" /> : <IconCheck stroke={2} className="size-5" />}
+            <CardFooter className="border-none bg-transparent flex flex-col gap-2">
+              <Button
+                onClick={() => venderProductos(producto.id.toString())}
+                disabled={producto.stock === 0 || l}
+                className="w-full rounded-xs py-4 leading-tight tracking-tight cursor-pointer"
+              >
+                {l ? (
+                  <Spinner className="size-5 text-blue-400" />
+                ) : (
+                  <IconCheck stroke={2} className="size-5" />
+                )}
               </Button>
             </CardFooter>
           </Card>

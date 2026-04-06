@@ -136,7 +136,8 @@ export async function getVentasPorHora(): Promise<VentasPorHora[]> {
   // Por cada venta: leemos la hora del reloj (0–23) y sumamos su `total` a esa caja.
   // `aNumero` convierte el Decimal de Prisma a `number` para poder sumar sin rarezas.
   for (const v of ventas) {
-    const h = v.createdAt.getHours();
+    const fechaArgentina = new Date(v.createdAt.getTime() - 3 * 60 * 60 * 1000);
+    const h = fechaArgentina.getHours();
     acumulado.set(h, (acumulado.get(h) ?? 0) + aNumero(v.total));
   }
 

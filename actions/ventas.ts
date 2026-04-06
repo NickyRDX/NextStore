@@ -23,6 +23,22 @@ export async function getVentas(x: ItemCarrito[]) {
     const productos = await prisma.producto.findMany({
       where: { id: { in: x.map((i) => i.productoId) } },
     });
+    /* Por cada producto que se quiere vender:
+    - busca el producto en la lista
+    - si el stock es menor a la cantidad pedida
+    - si el stock es menor a la cantidad pedida
+    → retorna error con el nombre del producto
+    → la venta NO se crea
+ */
+    for(const i of x){
+      const q = productos.find((d) => d.id === i.productoId)!;
+      if(q.stock < i.cantidad){
+        return{
+          ok: false,
+          error: `No hay stock: ${q.nombre}, reponer ahora!!!`,
+        }
+      }
+    }
     //2. CALCULAR TOTALES
     let total = 0;
     let costoTotal = 0;
