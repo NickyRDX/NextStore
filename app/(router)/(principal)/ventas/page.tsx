@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useState} from "react";
 import { getVentas } from "@/actions/ventas";
 import { useProductSearch } from "@/hooks/useProductSearch";
 import Search from "./components/Search/Search";
@@ -17,14 +17,21 @@ import { Button } from "@/components/ui/button";
 import { IconCheck } from "@tabler/icons-react";
 export default function VentasPage() {
   const { query, setQuery, filtrados, loading, error } = useProductSearch();
+  const [l, setL] = useState<boolean>(false);
   async function venderProductos(productoId: string){
     try{
-      console.log(productoId) 
-      await getVentas([{productoId, cantidad: 1}])
-      toast.success("Producto vendido correctamente")
+      setL(true)
+      const r = await getVentas([{productoId, cantidad: 1}])
+      if(r.success){
+        toast.success("Producto vendido correctamente")
+        console.log(productoId) 
+      }else{
+        toast.error(r.error ?? "Error al vender el producto")
+      }
     }catch(e){
-      toast.error(e as string)
+      return{success: false, error: e as string}
     }
+    setL(false)
   }
   if (loading)
     return (
@@ -70,7 +77,7 @@ export default function VentasPage() {
             </CardContent>
             <CardFooter className="border-none bg-transparent">
               <Button onClick={()=>venderProductos(producto.id.toString())} className="w-full rounded-xs py-4 leading-tight tracking-tight cursor-pointer">
-                <IconCheck stroke={2} className="size-5" />
+                {l ? <Spinner className="size-5 text-blue-400" /> : <IconCheck stroke={2} className="size-5" />}
               </Button>
             </CardFooter>
           </Card>

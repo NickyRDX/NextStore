@@ -3,8 +3,6 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { ItemCarrito } from "@/types/ventas.type";
 import { createClient } from "@/lib/supabase/server";
-import { toast } from "sonner";
-
 export async function getVentas(x: ItemCarrito[]) {
   //0. OBTENER EL USUARIO AUTENTICADO
   const s = await createClient();
@@ -69,8 +67,10 @@ export async function getVentas(x: ItemCarrito[]) {
       });
     }
     revalidatePath("/dashboard");
+    revalidatePath("/productos");
+    return { success: true };
   } catch (e) {
     console.error(e);
-    toast.error(e as string ?? "Error al vender productos");
+    return { success: false, error: e as string };
   }
 }

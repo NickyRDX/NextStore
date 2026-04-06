@@ -1,8 +1,5 @@
-
-import { Badge } from '@/components/ui/badge';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { TrendingUpIcon } from 'lucide-react';
-import React from 'react'
 import {getProductosStats} from '@/actions/dashboard'
 import { connection } from 'next/server';
 import { IconBox } from '@tabler/icons-react';
@@ -17,13 +14,6 @@ export default async function CardProductos() {
           <CardDescription className="text-pretty tracking-tight text-muted-foreground text-xs">
             Productos Totales
           </CardDescription>
-
-          {/* <Badge
-            variant={`outline`}
-            className="flex gap-1 items-center font-medium"
-          >
-            <TrendingUpIcon className="size-3 text-green-400" />
-          </Badge> */}
           <div className="size-9 bg-amber-700/20 rounded-md flex items-center justify-center">
             <IconBox size={24} className="text-amber-400" />
           </div>
