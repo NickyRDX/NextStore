@@ -20,7 +20,7 @@ export default async function CardGanancias() {
     <Card className="border-muted-foreground/10 rounded-sm border w-full min-h-[220px] flex flex-col">
       <CardHeader className="space-y-0 pb-2">
         <div className="flex items-center w-full justify-between">
-          <CardDescription className="text-pretty tracking-tight text-muted-foreground text-xs">
+          <CardDescription className="text-pretty tracking-tight text-muted-foreground text-sm">
             Margen de Ganancias Reales
           </CardDescription>
 
