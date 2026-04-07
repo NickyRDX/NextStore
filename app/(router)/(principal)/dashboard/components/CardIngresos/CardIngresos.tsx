@@ -30,8 +30,8 @@ export default async function CardIngresos() {
             <TrendingUpIcon className="size-3 text-green-400" />
             AR$
           </Badge> */}
-          <div className="size-9 bg-green-700/20 rounded-md flex items-center justify-center">
-            <IconCurrencyDollar size={24} className="text-green-400" />
+          <div className="size-9 bg-green-300 rounded-md flex items-center justify-center">
+            <IconCurrencyDollar size={24} className="text-green-700" />
           </div>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">

@@ -23,15 +23,8 @@ export default async function CardBajoStock() {
           <CardDescription className="text-pretty tracking-tight text-muted-foreground text-sm">
             Productos con bajo stock
           </CardDescription>
-
-          {/* <Badge
-            variant={`outline`}
-            className="flex gap-1 items-center font-medium"
-          >
-            <TrendingDownIcon className="size-3 text-red-400" />
-          </Badge> */}
-          <div className="size-9 bg-red-700/20 rounded-md flex items-center justify-center">
-            <IconClipboardX size={24} className="text-red-400" />
+          <div className="size-9 bg-red-300 rounded-md flex items-center justify-center">
+            <IconClipboardX size={24} className="text-red-600" />
           </div>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">

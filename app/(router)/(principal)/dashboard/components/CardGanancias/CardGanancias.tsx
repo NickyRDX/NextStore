@@ -23,15 +23,8 @@ export default async function CardGanancias() {
           <CardDescription className="text-pretty tracking-tight text-muted-foreground text-sm">
             Margen de Ganancias Reales
           </CardDescription>
-
-          {/* <Badge
-            className="flex gap-1 items-center size-8"
-          >
-            
-            <IconFileDescription size={26} className='text-slate-700 dark:text-slate-200'/>
-          </Badge> */}
-          <div className="size-9 bg-sky-700/20 rounded-md flex items-center justify-center">
-            <IconFileDescription size={24} className="text-sky-400" />
+          <div className="size-9 bg-sky-400 rounded-md flex items-center justify-center">
+            <IconFileDescription size={24} className="text-sky-700" />
           </div>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">

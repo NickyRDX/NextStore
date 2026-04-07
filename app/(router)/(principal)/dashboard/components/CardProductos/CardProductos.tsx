@@ -14,8 +14,8 @@ export default async function CardProductos() {
           <CardDescription className="text-pretty tracking-tight text-muted-foreground text-sm">
             Productos Totales
           </CardDescription>
-          <div className="size-9 bg-amber-700/20 rounded-md flex items-center justify-center">
-            <IconBox size={24} className="text-amber-400" />
+          <div className="size-9 bg-amber-300 rounded-md flex items-center justify-center">
+            <IconBox size={24} className="text-amber-600" />
           </div>
         </div>
         <CardTitle className="text-slate-700 my-1.5 dark:text-slate-200 leading-relaxed tracking-tight text-3xl md:text-xl font-semibold text-pretty">
