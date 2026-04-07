@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -32,25 +32,23 @@ export default function page() {
       password: '',
     },
   });
-  async function onSubmit(data: LoginData){
-    setCargando(true)
-    const formData = new FormData()
-    formData.append('email', data.email)
-    formData.append('password', data.password)
-    await new Promise((r) => {
-      const intervalId = setInterval(()=>{
-        clearInterval(intervalId)
-        r(null)
-      }, 3000)
-    })
-    const result = await login(formData)
+  useEffect(()=>{
+    setCargando(false);
+    form.reset();
+  },[])
+  async function onSubmit(data: LoginData) {
+    setCargando(true);
+    const formData = new FormData();
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    const result = await login(formData);
     if(result.error){
-      toast.error(result.error)
+      toast.error(result.error);
+      setCargando(false);
     }else{
-      toast.success('Login exitoso')
+      toast.success('Login exitoso');
+      setCargando(false);
     }
-    setCargando(false)
-    form.reset()
   }
   return (
     <Card className="w-full max-w-sm shadow-lg rounded-sm border-slate-900/10 border max-h-full dark:border-slate-200/10 md:max-w-md">

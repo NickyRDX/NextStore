@@ -9,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TrendingDownIcon, TrendingUpIcon } from "lucide-react";
 import { connection } from 'next/server';
 import { getProductosStats } from '@/actions/dashboard';
 import { IconClipboardX } from "@tabler/icons-react";
