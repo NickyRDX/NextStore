@@ -135,12 +135,18 @@ export async function getVentasPorHora(): Promise<VentasPorHora[]> {
 
   // Por cada venta: leemos la hora del reloj (0–23) y sumamos su `total` a esa caja.
   // `aNumero` convierte el Decimal de Prisma a `number` para poder sumar sin rarezas.
+  // for (const v of ventas) {
+  //   const fechaArgentina = new Date(v.createdAt.getTime() - 3 * 60 * 60 * 1000);
+  //   const h = fechaArgentina.getHours();
+  //   acumulado.set(h, (acumulado.get(h) ?? 0) + aNumero(v.total));
+  // }
   for (const v of ventas) {
-    const fechaArgentina = new Date(v.createdAt.getTime() - 3 * 60 * 60 * 1000);
-    const h = fechaArgentina.getHours();
+    const horaArgentina = new Date(v.createdAt.toLocaleString("en-US", {
+      timeZone: "America/Argentina/Buenos_Aires"
+    }))
+    const h = horaArgentina.getHours();
     acumulado.set(h, (acumulado.get(h) ?? 0) + aNumero(v.total));
   }
-
   // Recharts (y similares) esperan un array de objetos planos: { hora, monto }.
   // Orden fijo 0→23 hace que el eje X siempre sea “00:00” … “23:00”.
   const filas: VentasPorHora[] = [];

@@ -47,7 +47,13 @@ export default function ProductosPage({
         <DialogAgregarProducto />
       </div>
 
-      <Suspense fallback={<Spinner className="size-6 text-blue-400" />}>
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center h-full w-full max-w-7xl mx-auto">
+            <Spinner className="size-6 text-blue-400" />
+          </div>
+        }
+      >
         <ProductosContent searchParams={searchParams} />
       </Suspense>
     </section>
