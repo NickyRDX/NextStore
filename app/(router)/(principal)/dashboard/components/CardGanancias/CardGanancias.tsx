@@ -9,8 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TrendingUpIcon } from "lucide-react";
 import { connection } from "next/server";
 import { getGanancias } from "@/actions/dashboard";
 export default async function CardGanancias() {
