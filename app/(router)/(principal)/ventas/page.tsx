@@ -53,7 +53,7 @@ export default function VentasPage() {
         {filtrados.map((producto) => (
           <Card
             key={producto.id}
-            className="border-muted-foreground/10 border rounded-xs hover:border-primary/80 min-h-40 transition-all duration-200 ease-in-out max-w-2xl md:max-w-xs"
+            className="border-muted-foreground/10 border rounded-sm hover:border-primary/80 min-h-40 transition-all duration-200 ease-in-out max-w-2xl md:max-w-xs"
           >
             <CardHeader className="space-y-6 flex flex-row justify-between">
               <CardTitle className="whitespace-nowrap overflow-hidden text-ellipsis leading-relaxed tracking-tight text-slate-700 dark:text-slate-200 text-2xl md:text-lg">
@@ -79,7 +79,7 @@ export default function VentasPage() {
               <Button
                 onClick={() => venderProductos(producto.id.toString())}
                 disabled={producto.stock === 0 || l}
-                className="w-full rounded-xs py-4 leading-tight tracking-tight cursor-pointer"
+                className="w-full rounded-sm py-4 leading-tight tracking-tight cursor-pointer"
               >
                 {l ? (
                   <Spinner className="size-5 text-blue-400" />

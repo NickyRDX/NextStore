@@ -7,7 +7,7 @@ export default function EmpleadosPage() {
   return (
     <section className="p-3">
       <div className="flex justify-end">
-        <Button className="gap-2 rounded-sm px-3 py-5" variant={`default`}>
+        <Button className="gap-2 rounded-sm px-3 py-5 cursor-pointer" variant={`default`}>
           Agregar Empleado
           <IconPlusFilled size={40} />
         </Button>

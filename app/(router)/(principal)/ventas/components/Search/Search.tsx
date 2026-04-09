@@ -13,7 +13,7 @@ export default function Search({ valor, onChange, resultados }: SearchProps) {
           type="text"
           value={valor}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-xs ring-blue-400 leading-relaxed tracking-tight text-base md:text-sm ring p-5 focus-visible:ring-blue-500/50"
+          className="w-full rounded-md ring-blue-400 leading-relaxed tracking-tight text-base md:text-sm ring p-5 focus-visible:ring-blue-500/50"
           placeholder="Buscar Producto"
           autoFocus
         />

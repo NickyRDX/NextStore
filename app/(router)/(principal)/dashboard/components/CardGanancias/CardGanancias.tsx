@@ -32,7 +32,7 @@ export default async function CardGanancias() {
       <CardFooter className="text-pretty bg-transparent text-sm border-none text-muted-foreground leading-tight tracking-tighter">
         Este recuadro muestra el margen de ganancia real obtenido hoy en tu
         drugstore, calculando la proporción entre la ganancia neta y el total
-        vendido. Margen de Ganancia del Drugstore: AR$ {montoGanancia.toFixed(2)}
+        vendido. Margen de Ganancia del Drugstore: AR$ {montoGanancia.toFixed(1)}
       </CardFooter>
     </Card>
   );
