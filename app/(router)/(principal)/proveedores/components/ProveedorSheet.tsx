@@ -133,15 +133,15 @@ export default function ProveedorSheet({
       {!isEditing && (
         <SheetTrigger asChild>
           <Button className="gap-1.5 cursor-pointer rounded-sm px-2.5 py-5 font-medium">
-            <IconPlusFilled size={16} />
             Agregar Proveedor
+            <IconPlusFilled size={16} />
           </Button>
         </SheetTrigger>
       )}
 
       <SheetContent
         side="right"
-        className="w-full sm:max-w-xl p-0 gap-0 flex flex-col border-muted-foreground/20"
+        className="w-full max-w-xl p-1.5 gap-2 flex flex-col border-muted-foreground/20"
       >
         {/* Header fijo */}
         <SheetHeader className="px-6 py-4 gap-1">
@@ -164,7 +164,7 @@ export default function ProveedorSheet({
           {/* ── Sección 1: Datos básicos ─────────────────────── */}
           <div className="px-6 py-5 space-y-4 border-none">
             <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              <IconUser size={12} />
+              <IconUser size={20} />
               Datos básicos
             </p>
 
@@ -216,7 +216,7 @@ export default function ProveedorSheet({
           {/* ── Sección 2: Contacto ───────────────────────────── */}
           <div className="px-6 py-5 space-y-4 border-none">
             <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              <IconPhone size={12} />
+              <IconPhone size={20} />
               Contacto
             </p>
 
@@ -285,7 +285,7 @@ export default function ProveedorSheet({
           {/* ── Sección 3: Notas internas ─────────────────────── */}
           <div className="px-6 py-5 border-none space-y-4">
             <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              <IconNotes size={12} />
+              <IconNotes size={20} />
               Notas internas
             </p>
             <Controller
@@ -307,7 +307,7 @@ export default function ProveedorSheet({
           <div className="px-6 py-5 space-y-4">
             <div className="flex items-center justify-between">
               <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                <IconCalendar size={12} />
+                <IconCalendar size={20} />
                 Agendar visita
               </p>
               {/* Toggle switch */}
@@ -395,7 +395,7 @@ export default function ProveedorSheet({
             type="submit"
             form="form-proveedor"
             disabled={loading}
-            className="w-full h-10 rounded-sm font-semibold cursor-pointer"
+            className="w-full h-10 rounded-xs font-semibold cursor-pointer"
           >
             {loading ? (
               <Spinner />

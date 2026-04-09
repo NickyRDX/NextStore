@@ -138,9 +138,9 @@ export default function TablaProveedores({ proveedores }: Props) {
         open={!!deleteTarget}
         onOpenChange={(open) => !open && setDeleteTarget(null)}
       >
-        <DialogContent className="max-w-sm">
+        <DialogContent className="max-w-sm rounded-xs">
           <DialogHeader>
-            <DialogTitle>¿Eliminar proveedor?</DialogTitle>
+            <DialogTitle>Eliminar proveedor?</DialogTitle>
             <DialogDescription>
               Vas a eliminar a{" "}
               <span className="font-semibold text-foreground">
@@ -149,10 +149,10 @@ export default function TablaProveedores({ proveedores }: Props) {
               . Esta acción no se puede deshacer.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="flex-row gap-2 sm:gap-2">
+          <DialogFooter className="flex-row gap-2 border-none bg-transparent sm:gap-2">
             <Button
               variant="outline"
-              className="flex-1 cursor-pointer"
+              className="flex-1 cursor-pointer rounded-xs"
               onClick={() => setDeleteTarget(null)}
               disabled={isDeleting}
             >
@@ -160,7 +160,7 @@ export default function TablaProveedores({ proveedores }: Props) {
             </Button>
             <Button
               variant="destructive"
-              className="flex-1 cursor-pointer"
+              className="flex-1 cursor-pointer rounded-xs"
               onClick={handleDelete}
               disabled={isDeleting}
             >
