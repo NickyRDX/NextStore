@@ -141,7 +141,7 @@ export default function ProveedorSheet({
 
       <SheetContent
         side="right"
-        className="w-full max-w-xl p-1.5 gap-2 flex flex-col border-muted-foreground/20"
+        className="w-full max-w-xl p-1 gap-2 flex flex-col border-muted-foreground/20"
       >
         {/* Header fijo */}
         <SheetHeader className="px-6 py-4 gap-1">
@@ -338,13 +338,14 @@ export default function ProveedorSheet({
                       <FieldLabel className="text-xs tracking-tight text-muted-foreground">
                         Seleccioná el día de la visita
                       </FieldLabel>
-                      <div className="flex justify-center">
+                      <div className="w-full rounded-xl border border-border/60 bg-card overflow-hidden">
                         <Calendar
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
                           disabled={{ before: new Date() }}
-                          className="rounded-lg border"
+                          className="w-full"
+                          captionLayout="dropdown"
                         />
                       </div>
                       {fechaSeleccionada && (
